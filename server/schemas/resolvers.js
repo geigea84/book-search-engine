@@ -32,7 +32,7 @@ const resolvers = {
             throw new AuthenticationError('Not logged in');
         }
     },
-    Mutations: {
+    Mutation: {
         login: async (parent, { email, password }) => {
             const user = await User.findOne({ email });
 
