@@ -4,7 +4,7 @@ This is an application that allows you create a profile, search for books you wo
 
 https://book-search-engine-geigeraaron.herokuapp.com/
 
-![live site image](./zbooksearch.png)
+![screenshot](./zbooksearch.png)
 
 AS AN avid reader
 I WANT to search for new books to read
