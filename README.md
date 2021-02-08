@@ -1,5 +1,11 @@
 # Book Search Engine
 
+This is an application that allows you create a profile, search for books you would like to peruse, and add the searched books to you profile.
+
+https://book-search-engine-geigeraaron.herokuapp.com/
+
+![live site image](zbooksearch.png)
+
 AS AN avid reader
 I WANT to search for new books to read
 SO THAT I can keep a list of books to purchase
