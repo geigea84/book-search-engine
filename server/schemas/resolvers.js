@@ -8,6 +8,11 @@ const { AuthenticationError } = require('apollo-server-express');
 
 //import signToken from utils/auth
 const { signToken } = require('../utils/auth');
+const mongoose = require('mongoose');
+
+//findOneAndUpdate is no longer default, update findAndModify
+//https://mongoosejs.com/docs/deprecations.html#findandmodify
+mongoose.set('useFindAndModify', false);
 
 //Query:
 //me

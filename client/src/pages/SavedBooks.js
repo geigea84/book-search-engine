@@ -1,11 +1,12 @@
 import React from 'react';
 import { useMutation, useQuery } from '@apollo/react-hooks';
-import { Jumbotron, Container, CardColumns, Card, Button } from 'react-bootstrap';
 
 import { GET_ME } from '../utils/queries';
-import Auth from '../utils/auth';
 import { removeBookId } from '../utils/localStorage';
 import { REMOVE_BOOK } from '../utils/mutations';
+
+import { Jumbotron, Container, CardColumns, Card, Button } from 'react-bootstrap';
+import Auth from '../utils/auth';
 
 const SavedBooks = () => {
     //use useQuery hook to make query request
@@ -14,6 +15,7 @@ const SavedBooks = () => {
     const [removeBook, { error }] = useMutation(REMOVE_BOOK);
     //if data exists, store in userData, else save empty array
     const userData = data?.me || [];
+    console.log(userData);
 
     // create function that accepts the book's mongo _id value as param and deletes the book from the database
     const handleDeleteBook = async (bookId) => {
