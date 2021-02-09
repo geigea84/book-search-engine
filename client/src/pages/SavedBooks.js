@@ -3,7 +3,7 @@ import { useMutation, useQuery } from '@apollo/react-hooks';
 
 import { GET_ME } from '../utils/queries';
 import { removeBookId } from '../utils/localStorage';
-import { REMOVE_BOOK } from '../utils/mutations';
+import { REMOVE_BOOK, SAVE_BOOK } from '../utils/mutations';
 
 import { Jumbotron, Container, CardColumns, Card, Button } from 'react-bootstrap';
 import Auth from '../utils/auth';
@@ -14,7 +14,9 @@ const SavedBooks = () => {
     //creat const for useMutation(REMOVE_BOOK)
     const [removeBook, { error }] = useMutation(REMOVE_BOOK);
     //if data exists, store in userData, else save empty array
-    const userData = data?.me || [];
+    const [saveBook, {error}] = useMutation(saveBook);
+
+    const userData = data?.me || {savedBooks: []};
     console.log(userData);
 
     // create function that accepts the book's mongo _id value as param and deletes the book from the database
@@ -39,7 +41,7 @@ const SavedBooks = () => {
     };
 
     // if data isn't here yet, say so
-    if (!loading) {
+    if (loading) {
         return <h2>LOADING...</h2>;
     }
 
