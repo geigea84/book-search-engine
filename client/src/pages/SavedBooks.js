@@ -2,8 +2,8 @@ import React from 'react';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 
 import { GET_ME } from '../utils/queries';
+import { REMOVE_BOOK } from '../utils/mutations';
 import { removeBookId } from '../utils/localStorage';
-import { REMOVE_BOOK, SAVE_BOOK } from '../utils/mutations';
 
 import { Jumbotron, Container, CardColumns, Card, Button } from 'react-bootstrap';
 import Auth from '../utils/auth';
@@ -13,10 +13,8 @@ const SavedBooks = () => {
     const { loading, data } = useQuery(GET_ME);
     //creat const for useMutation(REMOVE_BOOK)
     const [removeBook, { error }] = useMutation(REMOVE_BOOK);
-    //if data exists, store in userData, else save empty array
-    const [saveBook, {error}] = useMutation(saveBook);
 
-    const userData = data?.me || {savedBooks: []};
+    const userData = data?.me || { savedBooks: [] };
     console.log(userData);
 
     // create function that accepts the book's mongo _id value as param and deletes the book from the database
@@ -33,8 +31,10 @@ const SavedBooks = () => {
                 variables: { bookId }
             });
 
+            console.log(data);
             // upon success, remove book's id from localStorage
             removeBookId(bookId);
+            console.log(bookId);
         } catch (err) {
             console.error(err);
         }
@@ -66,10 +66,14 @@ const SavedBooks = () => {
                                 <Card.Body>
                                     <Card.Title>{book.title}</Card.Title>
                                     <p className='small'>Authors: {book.authors}</p>
-                                    <Card.Text>{book.description}</Card.Text>
+                                    <Card.Text>
+                                        {book.description}
+                                        <br />
+                                        <a href={book.link}>View on Google Books</a>
+                                    </Card.Text>
                                     <Button className='btn-block btn-danger' onClick={() => handleDeleteBook(book.bookId)}>
                                         Delete this Book!
-                  </Button>
+                                    </Button>
                                 </Card.Body>
                             </Card>
                         );
